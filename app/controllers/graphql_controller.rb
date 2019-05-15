@@ -7,11 +7,7 @@ class GraphqlController < ApplicationController
       # Query context goes here, for example:
       # current_user: current_user,
     }
-    begin
-      result = ProjectSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
-    rescue Exception
-      result = { data: nil }
-    end
+    result = ProjectSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue => e
     raise e unless Rails.env.development?

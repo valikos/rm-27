@@ -21,10 +21,4 @@ GraphQL::Errors.configure(ProjectSchema) do
   rescue_from Exception do |exception|
     GraphQL::ExecutionError.new(exception.message)
   end
-
-  rescue_from Bullet::Notification::UnoptimizedQueryError do |exception, object, arguments, context|
-    error = GraphQL::ExecutionError.new("Error found!")
-    firstError.path = context.path + ["myError"]
-    context.add_error(firstError)
-  end
 end
